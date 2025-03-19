@@ -26,7 +26,7 @@ public class TestConfig implements CommandLineRunner {
 		
 		// chamo o userRepository para acessar os dados!!
 		
-		userRepository.saveAll(Arrays.asList(u1,u2));
+		userRepository.saveAll(Arrays.asList(u1,u2)); // chamo o método .savelAll para salvar minha instanciação acima!
 	}
 
 }

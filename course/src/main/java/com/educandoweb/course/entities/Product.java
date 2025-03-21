@@ -9,6 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -26,7 +29,10 @@ public class Product implements Serializable {
 	private String imgUrl;
 	
 	// Iniciando a associação (olhar no Diagrama Entidade Relacionamento)
-	@Transient // temporário, impede que JPA tente implementar
+	@ManyToMany // um produto está associado a várias categorias, um categoria está associado a vários produtos!
+	@JoinTable(name = "tb_product_category", 
+	joinColumns =@JoinColumn(name = "product_id"),
+	inverseJoinColumns = @JoinColumn(name = "category_id")) // qual vai ser o nome da tabela e quais serão as chaves estrangeiras que vai associar a tabela de produco com a tabela de categoria!
 	private Set<Category> categories = new HashSet<>(); // conjunto, o mesmo produto não pode ter mais de uma categoria de uma vez
 	
 	private Product () {

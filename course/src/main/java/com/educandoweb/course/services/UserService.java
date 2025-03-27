@@ -38,6 +38,20 @@ public class UserService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+	
+	public User update(Long id, User obj) {
+		User entity = repository.getReferenceById(id); // antigo getOne
+		updateData(entity, obj); // atualizar o entity baseado nos dados que chegaram do obj!!
+		return repository.save(entity);
+	}
+
+	private void updateData(User entity, User obj) {
+		// TODO Auto-generated method stub
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
+		
+	}
 }
 
 // operação buscar todos os usuários e buscar por todos os ids

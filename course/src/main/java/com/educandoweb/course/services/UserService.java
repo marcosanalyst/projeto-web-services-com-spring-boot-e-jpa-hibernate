@@ -31,6 +31,13 @@ public class UserService {
 	public User insert(User obj) {
 		return repository.save(obj);
 	}
+	
+	
+	// Primeiro crio um método simples para deletar, depois vou 
+	// UserResource, incluo o end-point para deletar!
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 }
 
 // operação buscar todos os usuários e buscar por todos os ids

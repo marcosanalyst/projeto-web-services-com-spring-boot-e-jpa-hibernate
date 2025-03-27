@@ -26,7 +26,11 @@ public class UserService {
 		Optional<User> obj = repository.findById(id);
 		return obj.get() ;
 	}
-
+	
+	// operação básica para inserir um novo usuário no BD
+	public User insert(User obj) {
+		return repository.save(obj);
+	}
 }
 
 // operação buscar todos os usuários e buscar por todos os ids

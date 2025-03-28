@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
+import com.educandoweb.course.services.execeptions.DatabaseException;
 import com.educandoweb.course.services.execeptions.ResourceNotFoundException;
 
 //@Component // registra a classe como componente no spring, para ser injetado automaticamente com autowired
@@ -38,7 +38,14 @@ public class UserService {
 	// Primeiro crio um método simples para deletar, depois vou 
 	// UserResource, incluo o end-point para deletar!
 	public void delete(Long id) {
-		repository.deleteById(id);
+	    try {
+	        if(!repository.existsById(id)) throw new ResourceNotFoundException(id);
+	        repository.deleteById(id);
+	    }catch (ResourceNotFoundException e){
+	        throw new ResourceNotFoundException(id);
+	    }catch (DataIntegrityViolationException e) {
+	    	throw new DatabaseException(e.getMessage());
+	    }
 	}
 	
 	public User update(Long id, User obj) {

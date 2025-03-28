@@ -32,15 +32,10 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd-'T'HH:mm:ss'Z'", timezone = "GMT") // ISO 8601:
-																											// isso vai
-																											// garantir
-																											// que meu
-																											// BD
-																											// trabalhe
-																											// com esse
-																											// formato.
-	private Instant moment; 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd-'T'HH:mm:ss'Z'", timezone = "GMT") 
+	private Instant moment;
+	// ISO 8601: isso vai garantir que meu  BD trabalhe com esse formato.
+	 
 	
 	private Integer orderStatus; // deixo de forma explicita para meu BD que ele deve gravar de forma inteira.
 

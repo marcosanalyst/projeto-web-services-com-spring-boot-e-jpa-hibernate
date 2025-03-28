@@ -31,7 +31,7 @@ public class TestConfig implements CommandLineRunner {
 	@Autowired
 	private OrderRepository orderRepository;
 	
-	// injeação de dependência
+	// injeção de dependência
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
@@ -48,8 +48,7 @@ public class TestConfig implements CommandLineRunner {
 		
 		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
 		User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
-		
-		// chamo o userRepository para acessar os dados!!
+
 		
 		
 		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAID, u1);
@@ -78,7 +77,7 @@ public class TestConfig implements CommandLineRunner {
 		
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		
-		
+		// chamo o userRepository para acessar os dados!!
 		userRepository.saveAll(Arrays.asList(u1,u2)); // chamo o método .savelAll para salvar minha instanciação acima!
 		
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));

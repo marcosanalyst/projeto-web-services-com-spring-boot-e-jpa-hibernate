@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
+import com.educandoweb.course.services.execeptions.ResourceNotFoundException;
 
 //@Component // registra a classe como componente no spring, para ser injetado automaticamente com autowired
 
@@ -24,7 +26,7 @@ public class UserService {
 	
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get() ;
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	// operação básica para inserir um novo usuário no BD

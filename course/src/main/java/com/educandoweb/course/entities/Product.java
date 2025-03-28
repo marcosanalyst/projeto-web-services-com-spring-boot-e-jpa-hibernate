@@ -32,10 +32,10 @@ public class Product implements Serializable {
 	private String imgUrl;
 	
 	// Iniciando a associação (olhar no Diagrama Entidade Relacionamento)
-	@ManyToMany // um produto está associado a várias categorias, um categoria está associado a vários produtos!
-	@JoinTable(name = "tb_product_category", 
-	joinColumns =@JoinColumn(name = "product_id"),
-	inverseJoinColumns = @JoinColumn(name = "category_id")) // qual vai ser o nome da tabela e quais serão as chaves estrangeiras que vai associar a tabela de produco com a tabela de categoria!
+	@ManyToMany // um produto está associado a várias categorias, uma categoria está associado a vários produtos!
+	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"),	inverseJoinColumns = @JoinColumn(name = "category_id")) 
+	// qual vai ser o nome da tabela e quais serão as chaves estrangeiras que vai associar a tabela de produco com a tabela de categoria!
+	
 	private Set<Category> categories = new HashSet<>(); // conjunto, o mesmo produto não pode ter mais de uma categoria de uma vez
 	
 	@OneToMany(mappedBy = "id.product")

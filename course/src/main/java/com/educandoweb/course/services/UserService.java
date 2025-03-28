@@ -12,6 +12,8 @@ import com.educandoweb.course.repositories.UserRepository;
 import com.educandoweb.course.services.execeptions.DatabaseException;
 import com.educandoweb.course.services.execeptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 //@Component // registra a classe como componente no spring, para ser injetado automaticamente com autowired
 
 @Service // essa é uma classe de serviço
@@ -49,10 +51,15 @@ public class UserService {
 	}
 	
 	public User update(Long id, User obj) {
+		try {
 		User entity = repository.getReferenceById(id); // antigo getOne
 		updateData(entity, obj); // atualizar o entity baseado nos dados que chegaram do obj!!
 		return repository.save(entity);
+		} catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
+		
 
 	private void updateData(User entity, User obj) {
 		// TODO Auto-generated method stub
